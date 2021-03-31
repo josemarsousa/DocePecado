@@ -36,7 +36,7 @@ namespace DocePecado.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<Client> GetClientByIdAsync(int clientId)
+        public async Task<Client> GetClientByIdAsync(long clientId)
         {
             IQueryable<Client> query = this.context.Clients
                 .Include(c => c.Orders);

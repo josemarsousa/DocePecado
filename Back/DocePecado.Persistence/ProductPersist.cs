@@ -48,7 +48,7 @@ namespace DocePecado.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<Product> GetProductByIdAsync(int productId, bool includeOrders = false)
+        public async Task<Product> GetProductByIdAsync(long productId, bool includeOrders = false)
         {
             IQueryable<Product> query = this.context.Products;
 

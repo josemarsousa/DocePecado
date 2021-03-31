@@ -28,17 +28,50 @@ namespace DocePecado.Application
                 {
                     return await this.clientPersist.GetClientByIdAsync(model.Id);
                 }
+                return null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception(ex.Message);
             }
         }
 
-        public Task<bool> DeleteClient(long clientId)
+        public async Task<Client> UpdateClient(long clientId, Client model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = await this.clientPersist.GetClientByIdAsync(clientId);
+                if (client == null) return null;
+
+                model.Id = client.Id;
+
+                this.generalPersist.Update(model);
+                if (await this.generalPersist.SaveChangesAsync())
+                {
+                    return await this.clientPersist.GetClientByIdAsync(model.Id);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<bool> DeleteClient(long clientId)
+        {
+            try
+            {
+                var client = await this.clientPersist.GetClientByIdAsync(clientId);
+                if (client == null) throw new Exception("Cliente não encontrado");
+
+                this.generalPersist.Delete<Client>(client);
+                return await this.generalPersist.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Task<Client[]> GetAllClientsAsync()
@@ -51,12 +84,7 @@ namespace DocePecado.Application
             throw new NotImplementedException();
         }
 
-        public Task<Client> GetClientByIdAsync(int clientId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Client> UpdateClient(long clientId, Client model)
+        public Task<Client> GetClientByIdAsync(long clientId)
         {
             throw new NotImplementedException();
         }

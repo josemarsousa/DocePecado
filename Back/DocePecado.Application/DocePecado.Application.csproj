@@ -8,9 +8,5 @@
     <ProjectReference Include="..\DocePecado.Domain\DocePecado.Domain.csproj" />
     <ProjectReference Include="..\DocePecado.Persistence\DocePecado.Persistence.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
 
 </Project>

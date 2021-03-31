@@ -34,7 +34,7 @@ namespace DocePecado.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<District> GetDistrictByIdAsync(int districtId)
+        public async Task<District> GetDistrictByIdAsync(long districtId)
         {
             IQueryable<District> query = this.context.Districts;
 

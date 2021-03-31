@@ -28,17 +28,50 @@ namespace DocePecado.Application
                 {
                     return await this.orderPersist.GetOrderByIdAsync(model.Id, false);
                 }
+                return null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception(ex.Message);
             }
         }
 
-        public Task<bool> DeleteClient(long clientId)
+        public async Task<Order> UpdateClient(long orderId, Order model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var order = await this.orderPersist.GetOrderByIdAsync(orderId, false);
+                if (order == null) return null;
+
+                model.Id = order.Id;
+
+                this.generalPersist.Update(model);
+                if (await this.generalPersist.SaveChangesAsync())
+                {
+                    return await this.orderPersist.GetOrderByIdAsync(model.Id, false);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<bool> DeleteClient(long orderId)
+        {
+            try
+            {
+                var order = await this.orderPersist.GetOrderByIdAsync(orderId, false);
+                if (order == null) throw new Exception("Pedido não encontrado");
+
+                this.generalPersist.Delete<Order>(order);
+                return await this.generalPersist.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Task<Order[]> GetAllOrdersAsync(bool includeProducts = false)
@@ -51,12 +84,7 @@ namespace DocePecado.Application
             throw new NotImplementedException();
         }
 
-        public Task<Order> GetOrderByIdAsync(int orderId, bool includeProducts = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Order> UpdateClient(long clientId, Order model)
+        public Task<Order> GetOrderByIdAsync(long orderId, bool includeProducts = false)
         {
             throw new NotImplementedException();
         }
