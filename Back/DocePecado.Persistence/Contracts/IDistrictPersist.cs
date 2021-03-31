@@ -7,7 +7,7 @@ namespace DocePecado.Persistence.Contracts
     {
         Task<District[]> GetAllDistrictsAsync();
         Task<District[]> GetAllDistrictsByNameAsync(string name);
-        Task<District> GetDistrictByIdAsync(int districtId);
+        Task<District> GetDistrictByIdAsync(long districtId);
 
 
     }

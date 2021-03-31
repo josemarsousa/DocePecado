@@ -1,8 +1,4 @@
 ﻿using DocePecado.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DocePecado.Application.Contracts
@@ -15,6 +11,6 @@ namespace DocePecado.Application.Contracts
 
         Task<Client[]> GetAllClientsAsync();
         Task<Client[]> GetAllClientsByNameAsync(string name);
-        Task<Client> GetClientByIdAsync(int clientId);
+        Task<Client> GetClientByIdAsync(long clientId);
     }
 }

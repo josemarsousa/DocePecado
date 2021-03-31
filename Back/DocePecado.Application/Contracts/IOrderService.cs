@@ -1,10 +1,18 @@
 ﻿using DocePecado.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace DocePecado.Persistence.Contracts
+namespace DocePecado.Application.Contracts
 {
-    public interface IOrderPersist
+    interface IOrderService
     {
+        Task<Order> AddOrder(Order model);
+        Task<Order> UpdateClient(long clientId, Order model);
+        Task<bool> DeleteClient(long clientId);
+
         Task<Order[]> GetAllOrdersAsync(bool includeProducts = false);
         Task<Order[]> GetAllOrdersByNameAsync(string name, bool includeProducts = false);
         Task<Order> GetOrderByIdAsync(long orderId, bool includeProducts = false);

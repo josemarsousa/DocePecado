@@ -8,6 +8,6 @@ namespace DocePecado.Persistence.Contracts
         //CLIENT
         Task<Client[]> GetAllClientsAsync();
         Task<Client[]> GetAllClientsByNameAsync(string name);
-        Task<Client> GetClientByIdAsync(int clientId);
+        Task<Client> GetClientByIdAsync(long clientId);
     }
 }
