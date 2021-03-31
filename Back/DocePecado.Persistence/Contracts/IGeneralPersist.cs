@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DocePecado.Persistence.Contract
+namespace DocePecado.Persistence.Contracts
 {
     public interface IGeneralPersist
     {

@@ -1,7 +1,7 @@
 ﻿using DocePecado.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace DocePecado.Persistence
+namespace DocePecado.Persistence.Contexts
 {
     public class AppDbContext : DbContext
     {

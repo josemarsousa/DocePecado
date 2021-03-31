@@ -1,4 +1,5 @@
-﻿using DocePecado.Persistence.Contract;
+﻿using DocePecado.Persistence.Contexts;
+using DocePecado.Persistence.Contracts;
 using System.Threading.Tasks;
 
 namespace DocePecado.Persistence

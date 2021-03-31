@@ -1,5 +1,6 @@
 ﻿using DocePecado.Domain;
-using DocePecado.Persistence.Contract;
+using DocePecado.Persistence.Contexts;
+using DocePecado.Persistence.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
