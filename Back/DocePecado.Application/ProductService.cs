@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocePecado.Application
 {
-    class ProductService : IProductService
+    public class ProductService : IProductService
     {
         private readonly IGeneralPersist generalPersist;
         private readonly IProductPersist productPersist;

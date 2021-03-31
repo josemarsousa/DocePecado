@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocePecado.Application
 {
-    class DistrictService : IDistrictService
+    public class DistrictService : IDistrictService
     {
         private readonly IGeneralPersist generalPersist;
         private readonly IDistrictPersist districtPersist;

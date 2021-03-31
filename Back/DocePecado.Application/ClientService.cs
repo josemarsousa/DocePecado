@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocePecado.Application
 {
-    class ClientService : IClientService
+    public class ClientService : IClientService
     {
         private readonly IGeneralPersist generalPersist;
         private readonly IClientPersist clientPersist;

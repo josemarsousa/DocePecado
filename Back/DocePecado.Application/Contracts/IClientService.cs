@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace DocePecado.Application.Contracts
 {
-    interface IClientService
+    public interface IClientService
     {
         Task<Client> AddClient(Client model);
         Task<Client> UpdateClient(long clientId, Client model);

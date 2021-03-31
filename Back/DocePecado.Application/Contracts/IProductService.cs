@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace DocePecado.Application.Contracts
 {
-    interface IProductService
+    public interface IProductService
     {
         Task<Product> AddOrder(Product model);
         Task<Product> UpdateClient(long productId, Product model);
