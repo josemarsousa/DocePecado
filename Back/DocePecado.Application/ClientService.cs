@@ -2,9 +2,6 @@
 using DocePecado.Domain;
 using DocePecado.Persistence.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DocePecado.Application
@@ -74,19 +71,49 @@ namespace DocePecado.Application
             }
         }
 
-        public Task<Client[]> GetAllClientsAsync()
+        public async Task<Client[]> GetAllClientsAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = await this.clientPersist.GetAllClientsAsync();
+                if (client == null) return null;
+
+                return client;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<Client[]> GetAllClientsByNameAsync(string name)
+        public async Task<Client[]> GetAllClientsByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = await this.clientPersist.GetAllClientsByNameAsync(name);
+                if (client == null) return null;
+
+                return client;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<Client> GetClientByIdAsync(long clientId)
+        public async Task<Client> GetClientByIdAsync(long clientId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = await this.clientPersist.GetClientByIdAsync(clientId);
+                if (client == null) return null;
+
+                return client;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -2,9 +2,6 @@
 using DocePecado.Domain;
 using DocePecado.Persistence.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DocePecado.Application
@@ -74,19 +71,49 @@ namespace DocePecado.Application
             }
         }
 
-        public Task<Order[]> GetAllOrdersAsync(bool includeProducts = false)
+        public async Task<Order[]> GetAllOrdersAsync(bool includeProducts = false)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var orders = await this.orderPersist.GetAllOrdersAsync(includeProducts);
+                if (orders == null) return null;
+
+                return orders;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<Order[]> GetAllOrdersByNameAsync(string name, bool includeProducts = false)
+        public async Task<Order[]> GetAllOrdersByNameAsync(string name, bool includeProducts = false)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var orders = await this.orderPersist.GetAllOrdersByNameAsync(name, includeProducts);
+                if (orders == null) return null;
+
+                return orders;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<Order> GetOrderByIdAsync(long orderId, bool includeProducts = false)
+        public async Task<Order> GetOrderByIdAsync(long orderId, bool includeProducts = false)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var orders = await this.orderPersist.GetOrderByIdAsync(orderId, includeProducts);
+                if (orders == null) return null;
+
+                return orders;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
