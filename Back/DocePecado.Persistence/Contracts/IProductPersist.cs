@@ -5,8 +5,8 @@ namespace DocePecado.Persistence.Contracts
 {
     public interface IProductPersist
     {
-        Task<Product[]> GetAllProductsAsync(bool includeOrders);
-        Task<Product[]> GetAllProductsByNameAsync(string name, bool includeOrders);
-        Task<Product> GetProductByIdAsync(int productId, bool includeOrders);
+        Task<Product[]> GetAllProductsAsync(bool includeOrders = false);
+        Task<Product[]> GetAllProductsByNameAsync(string name, bool includeOrders = false);
+        Task<Product> GetProductByIdAsync(int productId, bool includeOrders = false);
     }
 }
