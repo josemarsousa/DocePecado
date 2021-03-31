@@ -5,9 +5,9 @@ namespace DocePecado.Application.Contracts
 {
     public interface IDistrictService
     {
-        Task<District> AddClient(District model);
-        Task<District> UpdateClient(long districtId, District model);
-        Task<bool> DeleteClient(long districtId);
+        Task<District> AddDistrict(District model);
+        Task<District> UpdateDistrict(long districtId, District model);
+        Task<bool> DeleteDistrict(long districtId);
 
         Task<District[]> GetAllDistrictsAsync();
         Task<District[]> GetAllDistrictsByNameAsync(string name);

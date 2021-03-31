@@ -5,9 +5,9 @@ namespace DocePecado.Application.Contracts
 {
     public interface IProductService
     {
-        Task<Product> AddOrder(Product model);
-        Task<Product> UpdateClient(long productId, Product model);
-        Task<bool> DeleteClient(long productId);
+        Task<Product> AddProduct(Product model);
+        Task<Product> UpdateProduct(long productId, Product model);
+        Task<bool> DeleteProduct(long productId);
 
         Task<Product[]> GetAllProductsAsync(bool includeOrders = false);
         Task<Product[]> GetAllProductsByNameAsync(string name, bool includeOrders = false);

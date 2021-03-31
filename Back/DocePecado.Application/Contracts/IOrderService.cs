@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace DocePecado.Application.Contracts
 {
-    interface IOrderService
+    public interface IOrderService
     {
         Task<Order> AddOrder(Order model);
-        Task<Order> UpdateClient(long orderId, Order model);
-        Task<bool> DeleteClient(long orderId);
+        Task<Order> UpdateOrder(long orderId, Order model);
+        Task<bool> DeleteOrder(long orderId);
 
         Task<Order[]> GetAllOrdersAsync(bool includeProducts = false);
         Task<Order[]> GetAllOrdersByNameAsync(string name, bool includeProducts = false);
