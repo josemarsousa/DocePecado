@@ -19,4 +19,5 @@
 1. Microsoft.EntityFrameworkCore;
 2. Microsoft.EntityFrameworkCore.Design;
 3. Microsoft.EntityFrameworkCore.Tools;
-4. Pomelo.EntityFrameworkCore.MySql.
+4. Pomelo.EntityFrameworkCore.MySql;
+5. Microsoft.AspNetCore.Mvc.NewtonsoftJson.
