@@ -1,4 +1,8 @@
+using DocePecado.Application;
+using DocePecado.Application.Contracts;
+using DocePecado.Persistence;
 using DocePecado.Persistence.Contexts;
+using DocePecado.Persistence.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +29,16 @@ namespace DocePecado
                 context => context.UseMySql(Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
+            //Dependency Injection
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IGeneralPersist, GeneralPersist>();
+            services.AddScoped<IOrderPersist, OrderPersist>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DocePecado", Version = "v1" });
