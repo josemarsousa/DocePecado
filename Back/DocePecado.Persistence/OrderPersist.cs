@@ -13,6 +13,7 @@ namespace DocePecado.Persistence
         public OrderPersist(AppDbContext context)
         {
             this.context = context;
+            this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public async Task<Order[]> GetAllOrdersAsync(bool includeProducts = false)
