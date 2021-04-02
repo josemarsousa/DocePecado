@@ -33,7 +33,7 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Order> UpdateClient(long orderId, Order model)
+        public async Task<Order> UpdateOrder(long orderId, Order model)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<bool> DeleteClient(long orderId)
+        public async Task<bool> DeleteOrder(long orderId)
         {
             try
             {

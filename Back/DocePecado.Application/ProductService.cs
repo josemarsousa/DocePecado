@@ -16,7 +16,7 @@ namespace DocePecado.Application
             this.generalPersist = generalPersist;
             this.productPersist = productPersist;
         }
-        public async Task<Product> AddOrder(Product model)
+        public async Task<Product> AddProduct(Product model)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Product> UpdateClient(long productId, Product model)
+        public async Task<Product> UpdateProduct(long productId, Product model)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<bool> DeleteClient(long productId)
+        public async Task<bool> DeleteProduct(long productId)
         {
             try
             {

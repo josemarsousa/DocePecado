@@ -16,7 +16,7 @@ namespace DocePecado.Application
             this.generalPersist = generalPersist;
             this.districtPersist = districtPersist;
         }
-        public async Task<District> AddClient(District model)
+        public async Task<District> AddDistrict(District model)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<District> UpdateClient(long districtId, District model)
+        public async Task<District> UpdateDistrict(long districtId, District model)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<bool> DeleteClient(long districtId)
+        public async Task<bool> DeleteDistrict(long districtId)
         {
             try
             {
