@@ -4,11 +4,12 @@ using DocePecado.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DocePecado.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210328190743_FirstMigration")]
+    [Migration("20210403234143_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,10 +36,12 @@ namespace DocePecado.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20) CHARACTER SET utf8mb4");
 
@@ -62,11 +65,12 @@ namespace DocePecado.Persistence.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<decimal>("PriceDelivery")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -95,6 +99,7 @@ namespace DocePecado.Persistence.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
@@ -103,7 +108,7 @@ namespace DocePecado.Persistence.Migrations
                         .HasColumnType("varchar(500) CHARACTER SET utf8mb4");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Status")
                         .HasMaxLength(1)
@@ -138,7 +143,7 @@ namespace DocePecado.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -163,7 +168,7 @@ namespace DocePecado.Persistence.Migrations
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -195,7 +200,7 @@ namespace DocePecado.Persistence.Migrations
                         .HasForeignKey("OrderId");
 
                     b.HasOne("DocePecado.Domain.Product", "Product")
-                        .WithMany("OrderProducts")
+                        .WithMany()
                         .HasForeignKey("ProductId");
 
                     b.Navigation("Order");
@@ -209,11 +214,6 @@ namespace DocePecado.Persistence.Migrations
                 });
 
             modelBuilder.Entity("DocePecado.Domain.Order", b =>
-                {
-                    b.Navigation("OrderProducts");
-                });
-
-            modelBuilder.Entity("DocePecado.Domain.Product", b =>
                 {
                     b.Navigation("OrderProducts");
                 });

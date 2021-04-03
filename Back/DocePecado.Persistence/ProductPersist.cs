@@ -15,32 +15,18 @@ namespace DocePecado.Persistence
             this.context = context;
         }
 
-        public async Task<Product[]> GetAllProductsAsync(bool includeOrders = false)
+        public async Task<Product[]> GetAllProductsAsync()
         {
             IQueryable<Product> query = this.context.Products;
-
-            if (includeOrders)
-            {
-                query = query
-                    .Include(p => p.OrderProducts)
-                    .ThenInclude(op => op.Order);
-            }
 
             query = query.OrderBy(p => p.Id);
 
             return await query.ToArrayAsync();
         }
 
-        public async Task<Product[]> GetAllProductsByNameAsync(string name, bool includeOrders = false)
+        public async Task<Product[]> GetAllProductsByNameAsync(string name)
         {
             IQueryable<Product> query = this.context.Products;
-
-            if (includeOrders)
-            {
-                query = query
-                    .Include(p => p.OrderProducts)
-                    .ThenInclude(op => op.Order);
-            }
 
             query = query.OrderBy(p => p.Id)
                 .Where(p => p.Name.ToLower().Contains(name.ToLower()));
@@ -48,16 +34,9 @@ namespace DocePecado.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<Product> GetProductByIdAsync(long productId, bool includeOrders = false)
+        public async Task<Product> GetProductByIdAsync(long productId)
         {
             IQueryable<Product> query = this.context.Products;
-
-            if (includeOrders)
-            {
-                query = query
-                    .Include(p => p.OrderProducts)
-                    .ThenInclude(op => op.Order);
-            }
 
             query = query.OrderBy(p => p.Id)
                 .Where(p => p.Id == productId);
