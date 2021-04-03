@@ -16,8 +16,9 @@
 
 ## Dependencies
 
-1. Microsoft.EntityFrameworkCore;
-2. Microsoft.EntityFrameworkCore.Design;
-3. Microsoft.EntityFrameworkCore.Tools;
-4. Pomelo.EntityFrameworkCore.MySql;
-5. Microsoft.AspNetCore.Mvc.NewtonsoftJson.
+1. Microsoft.EntityFrameworkCore `Version="5.0.4"`;
+2. Microsoft.EntityFrameworkCore.Design `Version="5.0.4"`;
+3. Microsoft.EntityFrameworkCore.Tools `Version="5.0.4"`;
+4. Pomelo.EntityFrameworkCore.MySql `Version="5.0.0-alpha.1"`;
+5. Microsoft.AspNetCore.Mvc.NewtonsoftJson `Version="5.0.4"`;
+6. AutoMapper.Extensions.Microsoft.DependencyInjection `Version="8.1.1"`.
