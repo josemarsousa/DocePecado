@@ -23,7 +23,7 @@ namespace DocePecado.Application
                 this.generalPersist.Add<Product>(model);
                 if (await this.generalPersist.SaveChangesAsync())
                 {
-                    return await this.productPersist.GetProductByIdAsync(model.Id, false);
+                    return await this.productPersist.GetProductByIdAsync(model.Id);
                 }
                 return null;
             }
@@ -37,7 +37,7 @@ namespace DocePecado.Application
         {
             try
             {
-                var product = await this.productPersist.GetProductByIdAsync(productId, false);
+                var product = await this.productPersist.GetProductByIdAsync(productId);
                 if (product == null) return null;
 
                 model.Id = product.Id;
@@ -45,7 +45,7 @@ namespace DocePecado.Application
                 this.generalPersist.Update(model);
                 if (await this.generalPersist.SaveChangesAsync())
                 {
-                    return await this.productPersist.GetProductByIdAsync(model.Id, false);
+                    return await this.productPersist.GetProductByIdAsync(model.Id);
                 }
                 return null;
             }
@@ -59,7 +59,7 @@ namespace DocePecado.Application
         {
             try
             {
-                var product = await this.productPersist.GetProductByIdAsync(productId, false);
+                var product = await this.productPersist.GetProductByIdAsync(productId);
                 if (product == null) throw new Exception("Produto não encontrado");
 
                 this.generalPersist.Delete<Product>(product);
@@ -71,11 +71,11 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Product[]> GetAllProductsAsync(bool includeOrders = false)
+        public async Task<Product[]> GetAllProductsAsync()
         {
             try
             {
-                var product = await this.productPersist.GetAllProductsAsync(includeOrders);
+                var product = await this.productPersist.GetAllProductsAsync();
                 if (product == null) return null;
 
                 return product;
@@ -86,11 +86,11 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Product[]> GetAllProductsByNameAsync(string name, bool includeOrders = false)
+        public async Task<Product[]> GetAllProductsByNameAsync(string name)
         {
             try
             {
-                var product = await this.productPersist.GetAllProductsByNameAsync(name, includeOrders);
+                var product = await this.productPersist.GetAllProductsByNameAsync(name);
                 if (product == null) return null;
 
                 return product;
@@ -101,11 +101,11 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Product> GetProductByIdAsync(long productId, bool includeOrders = false)
+        public async Task<Product> GetProductByIdAsync(long productId)
         {
             try
             {
-                var product = await this.productPersist.GetProductByIdAsync(productId, includeOrders);
+                var product = await this.productPersist.GetProductByIdAsync(productId);
                 if (product == null) return null;
 
                 return product;

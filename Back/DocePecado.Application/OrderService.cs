@@ -1,4 +1,6 @@
-﻿using DocePecado.Application.Contracts;
+﻿using AutoMapper;
+using DocePecado.Application.Contracts;
+using DocePecado.Application.Dtos;
 using DocePecado.Domain;
 using DocePecado.Persistence.Contracts;
 using System;
@@ -10,20 +12,26 @@ namespace DocePecado.Application
     {
         private readonly IGeneralPersist generalPersist;
         private readonly IOrderPersist orderPersist;
+        private readonly IMapper mapper;
 
-        public OrderService(IGeneralPersist generalPersist, IOrderPersist orderPersist)
+        public OrderService(IGeneralPersist generalPersist, IOrderPersist orderPersist, IMapper mapper)
         {
             this.generalPersist = generalPersist;
             this.orderPersist = orderPersist;
+            this.mapper = mapper;
         }
-        public async Task<Order> AddOrder(Order model)
+        public async Task<OrderDto> AddOrder(OrderDto model)
         {
             try
             {
-                this.generalPersist.Add<Order>(model);
+                var order = this.mapper.Map<Order>(model);
+
+                this.generalPersist.Add<Order>(order);
+
                 if (await this.generalPersist.SaveChangesAsync())
                 {
-                    return await this.orderPersist.GetOrderByIdAsync(model.Id, false);
+                    var orderReturn = await this.orderPersist.GetOrderByIdAsync(order.Id, false);
+                    return this.mapper.Map<OrderDto>(orderReturn);
                 }
                 return null;
             }
@@ -33,7 +41,7 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Order> UpdateOrder(long orderId, Order model)
+        public async Task<OrderDto> UpdateOrder(long orderId, OrderDto model)
         {
             try
             {
@@ -42,10 +50,14 @@ namespace DocePecado.Application
 
                 model.Id = order.Id;
 
-                this.generalPersist.Update(model);
+                this.mapper.Map(model, order);
+
+                this.generalPersist.Update<Order>(order);
+
                 if (await this.generalPersist.SaveChangesAsync())
                 {
-                    return await this.orderPersist.GetOrderByIdAsync(model.Id, false);
+                    var orderReturn = await this.orderPersist.GetOrderByIdAsync(order.Id, false);
+                    return this.mapper.Map<OrderDto>(orderReturn);
                 }
                 return null;
             }
@@ -71,14 +83,16 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Order[]> GetAllOrdersAsync(bool includeProducts = false)
+        public async Task<OrderDto[]> GetAllOrdersAsync(bool includeProducts = false)
         {
             try
             {
                 var orders = await this.orderPersist.GetAllOrdersAsync(includeProducts);
                 if (orders == null) return null;
 
-                return orders;
+                var result = this.mapper.Map<OrderDto[]>(orders);
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -86,14 +100,16 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Order[]> GetAllOrdersByNameAsync(string name, bool includeProducts = false)
+        public async Task<OrderDto[]> GetAllOrdersByNameAsync(string name, bool includeProducts = false)
         {
             try
             {
                 var orders = await this.orderPersist.GetAllOrdersByNameAsync(name, includeProducts);
                 if (orders == null) return null;
 
-                return orders;
+                var result = this.mapper.Map<OrderDto[]>(orders);
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -101,14 +117,16 @@ namespace DocePecado.Application
             }
         }
 
-        public async Task<Order> GetOrderByIdAsync(long orderId, bool includeProducts = false)
+        public async Task<OrderDto> GetOrderByIdAsync(long orderId, bool includeProducts = false)
         {
             try
             {
-                var orders = await this.orderPersist.GetOrderByIdAsync(orderId, includeProducts);
-                if (orders == null) return null;
+                var order = await this.orderPersist.GetOrderByIdAsync(orderId, includeProducts);
+                if (order == null) return null;
 
-                return orders;
+                var result = this.mapper.Map<OrderDto>(order);
+
+                return result;
             }
             catch (Exception ex)
             {
