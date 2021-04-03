@@ -1,11 +1,8 @@
 ﻿using DocePecado.Application.Contracts;
-using DocePecado.Domain;
+using DocePecado.Application.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DocePecado.Controllers
@@ -27,7 +24,7 @@ namespace DocePecado.Controllers
             try
             {
                 var orders = await this.orderService.GetAllOrdersAsync(true);
-                if (orders == null) return NotFound("Nenhum pedido encontrado.");
+                if (orders == null) return NotFound();
 
                 return Ok(orders);
             }
@@ -44,7 +41,7 @@ namespace DocePecado.Controllers
             try
             {
                 var order = await this.orderService.GetOrderByIdAsync(id, true);
-                if (order == null) return NotFound("Nenhum pedido encontrado com Id informado.");
+                if (order == null) return NotFound();
 
                 return Ok(order);
             }
@@ -61,7 +58,7 @@ namespace DocePecado.Controllers
             try
             {
                 var orders = await this.orderService.GetAllOrdersByNameAsync(name, true);
-                if (orders == null) return NotFound("Nenhum pedido encontrado com nome informado.");
+                if (orders == null) return NotFound();
 
                 return Ok(orders);
             }
@@ -73,12 +70,12 @@ namespace DocePecado.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Order model)
+        public async Task<IActionResult> Post(OrderDto model)
         {
             try
             {
                 var order = await this.orderService.AddOrder(model);
-                if (order == null) return BadRequest("Erro ao tentar adicionar pedido.");
+                if (order == null) return BadRequest();
 
                 return Ok(order);
             }
@@ -90,12 +87,12 @@ namespace DocePecado.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, Order model)
+        public async Task<IActionResult> Put(long id, OrderDto model)
         {
             try
             {
                 var order = await this.orderService.UpdateOrder(id, model);
-                if (order == null) return BadRequest("Erro ao tentar atualizar pedido.");
+                if (order == null) return BadRequest();
 
                 return Ok(order);
             }
@@ -111,7 +108,10 @@ namespace DocePecado.Controllers
         {
             try
             {
-                return await this.orderService.DeleteOrder(id) ? Ok("Deletado") :BadRequest("Pedido nao deletado");
+                var order = await this.orderService.GetOrderByIdAsync(id, true);
+                if (order == null) return NotFound();
+
+                return await this.orderService.DeleteOrder(id) ? Ok("Deletado") : throw new Exception("Ocorreu um problema ao tentar deletar pedido");
             }
             catch (Exception ex)
             {
