@@ -7,7 +7,7 @@ namespace DocePecado.Domain
 {
     public class Order : BaseModel
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -25,6 +25,7 @@ namespace DocePecado.Domain
         [StringLength(1)]
         public string Status { get; set; }
 
+        public int ClientId { get; set; }
         public Client Client { get; set; }
 
         public IEnumerable<OrderProduct> OrderProducts { get; set; }

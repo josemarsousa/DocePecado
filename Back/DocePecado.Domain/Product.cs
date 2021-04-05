@@ -6,7 +6,7 @@ namespace DocePecado.Domain
 {
     public class Product
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(255)]
         public string Name { get; set; }

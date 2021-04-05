@@ -5,7 +5,7 @@ namespace DocePecado.Domain
 {
     public class District : BaseModel
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(255)]
