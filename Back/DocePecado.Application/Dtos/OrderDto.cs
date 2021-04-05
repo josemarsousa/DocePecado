@@ -5,7 +5,7 @@ namespace DocePecado.Application.Dtos
 {
     public class OrderDto
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Name { get; set; }
@@ -18,6 +18,7 @@ namespace DocePecado.Application.Dtos
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public decimal Price { get; set; }
         public string Status { get; set; }
+        public int ClientId { get; set; }
         public ClientDto Client { get; set; }
         public IEnumerable<OrderProductDto> OrderProducts { get; set; }
     }
