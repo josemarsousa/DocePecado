@@ -13,24 +13,18 @@ namespace DocePecado.Persistence.Contexts
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    //Define o int id como uma foreign key
-        //    modelBuilder.Entity<OrderProduct>()
-        //        .HasKey(OP => new { OP.Order, OP.Product });
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //Define chave composta para OrderProduct
+            modelBuilder.Entity<OrderProduct>()
+                .HasKey(OP => new { OP.OrderId, OP.ProductId });
 
-        //    //Deletar PedidoProdudo ao deletar o pedido
-        //    modelBuilder.Entity<Order>()
-        //        .HasMany(o => o.OrderProducts)
-        //        .WithOne(op => op.Order)
-        //        .OnDelete(DeleteBehavior.Cascade);
-
-        //    //Deletar PedidoProdudo ao deletar o produto
-        //    modelBuilder.Entity<Product>()
-        //        .HasMany(p => p.OrderProducts)
-        //        .WithOne(op => op.Product)
-        //        .OnDelete(DeleteBehavior.Cascade);
-        //}
+            //Deletar PedidoProdudo ao deletar o pedido
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderProducts)
+                .WithOne(op => op.Order)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
 
 
     }

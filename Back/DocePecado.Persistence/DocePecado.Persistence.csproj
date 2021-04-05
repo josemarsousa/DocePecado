@@ -13,4 +13,8 @@
     <ProjectReference Include="..\DocePecado.Domain\DocePecado.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

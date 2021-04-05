@@ -19,9 +19,9 @@ namespace DocePecado.Persistence.Migrations
 
             modelBuilder.Entity("DocePecado.Domain.Client", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .HasMaxLength(255)
@@ -30,8 +30,8 @@ namespace DocePecado.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DistrictId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -55,9 +55,9 @@ namespace DocePecado.Persistence.Migrations
 
             modelBuilder.Entity("DocePecado.Domain.District", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -80,12 +80,12 @@ namespace DocePecado.Persistence.Migrations
 
             modelBuilder.Entity("DocePecado.Domain.Order", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    b.Property<long?>("ClientId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -124,9 +124,11 @@ namespace DocePecado.Persistence.Migrations
 
             modelBuilder.Entity("DocePecado.Domain.OrderProduct", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
@@ -134,21 +136,13 @@ namespace DocePecado.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("OrderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("ProductId")
-                        .HasColumnType("bigint");
-
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
+                    b.HasKey("OrderId", "ProductId");
 
                     b.HasIndex("ProductId");
 
@@ -157,9 +151,9 @@ namespace DocePecado.Persistence.Migrations
 
             modelBuilder.Entity("DocePecado.Domain.Product", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasMaxLength(255)
@@ -177,7 +171,9 @@ namespace DocePecado.Persistence.Migrations
                 {
                     b.HasOne("DocePecado.Domain.District", "District")
                         .WithMany()
-                        .HasForeignKey("DistrictId");
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("District");
                 });
@@ -186,7 +182,9 @@ namespace DocePecado.Persistence.Migrations
                 {
                     b.HasOne("DocePecado.Domain.Client", "Client")
                         .WithMany("Orders")
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
                 });
@@ -195,11 +193,15 @@ namespace DocePecado.Persistence.Migrations
                 {
                     b.HasOne("DocePecado.Domain.Order", "Order")
                         .WithMany("OrderProducts")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DocePecado.Domain.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Order");
 
