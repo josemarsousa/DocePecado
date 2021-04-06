@@ -11,11 +11,11 @@ namespace DocePecado.Controllers
     [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderService orderService;
+        private readonly IOrderService _orderService;
 
         public OrderController(IOrderService orderService)
         {
-            this.orderService = orderService;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -23,7 +23,7 @@ namespace DocePecado.Controllers
         {
             try
             {
-                var orders = await this.orderService.GetAllOrdersAsync(true);
+                var orders = await _orderService.GetAllOrdersAsync(true);
                 if (orders == null) return NotFound();
 
                 return Ok(orders);
@@ -40,7 +40,7 @@ namespace DocePecado.Controllers
         {
             try
             {
-                var order = await this.orderService.GetOrderByIdAsync(id, true);
+                var order = await _orderService.GetOrderByIdAsync(id, true);
                 if (order == null) return NotFound();
 
                 return Ok(order);
@@ -57,7 +57,7 @@ namespace DocePecado.Controllers
         {
             try
             {
-                var orders = await this.orderService.GetAllOrdersByNameAsync(name, true);
+                var orders = await _orderService.GetAllOrdersByNameAsync(name, true);
                 if (orders == null) return NotFound();
 
                 return Ok(orders);
@@ -74,7 +74,7 @@ namespace DocePecado.Controllers
         {
             try
             {
-                var order = await this.orderService.AddOrder(model);
+                var order = await _orderService.AddOrder(model);
                 if (order == null) return BadRequest();
 
                 return Ok(order);
@@ -91,7 +91,7 @@ namespace DocePecado.Controllers
         {
             try
             {
-                var order = await this.orderService.UpdateOrder(id, model);
+                var order = await _orderService.UpdateOrder(id, model);
                 if (order == null) return BadRequest();
 
                 return Ok(order);
@@ -108,10 +108,10 @@ namespace DocePecado.Controllers
         {
             try
             {
-                var order = await this.orderService.GetOrderByIdAsync(id, true);
+                var order = await _orderService.GetOrderByIdAsync(id, true);
                 if (order == null) return NotFound();
 
-                return await this.orderService.DeleteOrder(id) ? Ok("Deletado") : throw new Exception("Ocorreu um problema ao tentar deletar pedido");
+                return await _orderService.DeleteOrder(id) ? Ok("Deletado") : throw new Exception("Ocorreu um problema ao tentar deletar pedido");
             }
             catch (Exception ex)
             {
