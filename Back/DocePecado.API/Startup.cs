@@ -40,9 +40,11 @@ namespace DocePecado
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             //Dependency Injection
-            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IGeneralPersist, GeneralPersist>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderPersist, OrderPersist>();
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IClientPersist, ClientPersist>();
 
             services.AddSwaggerGen(c =>
             {
