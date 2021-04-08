@@ -36,7 +36,7 @@ namespace DocePecado.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(long id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace DocePecado.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, OrderDto model)
+        public async Task<IActionResult> Put(int id, OrderDto model)
         {
             try
             {
