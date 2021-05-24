@@ -21,4 +21,3 @@
 3. Microsoft.EntityFrameworkCore.Tools `Version="5.0.4"`;
 4. Pomelo.EntityFrameworkCore.MySql `Version="5.0.0-alpha.1"`;
 5. Microsoft.AspNetCore.Mvc.NewtonsoftJson `Version="5.0.4"`;
-6. AutoMapper.Extensions.Microsoft.DependencyInjection `Version="8.1.1"`.
